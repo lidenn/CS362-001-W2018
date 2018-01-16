@@ -102,11 +102,11 @@ public class CalDay {
 	 */
 	public Iterator<?> iterator() {
 	    if (isValid()) {
-	        return getAppts().iterator();
-	    }
+			return getAppts().iterator();
+		}
 	    else {
-	        return null;
-	    }
+			return null;
+		}
 	}
 	
 	/** Sets appts */
@@ -151,8 +151,8 @@ public class CalDay {
 	 * are represented by 0-11 
 	 */
 	public int getMonth() {
-	    return month;
-	}
+	    return year;
+	} //should return month
 	
 	/** Gets year */
 	public int getYear() {
