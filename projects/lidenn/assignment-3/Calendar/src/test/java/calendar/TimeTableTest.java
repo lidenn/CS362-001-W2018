@@ -65,7 +65,11 @@ public class TimeTableTest {
 		 assertNotEquals("Second date specified is not before the first date specified.", timeTable.getApptRange(listAppts, today, tomorrow));
 		 int pv[] = {1, 0}; //Switches
 		 timeTable.permute(listAppts, pv);
+
+		 LinkedList<Appt> testAppts = new LinkedList<Appt>();
+		 testAppts.add(appt1);
 		 timeTable.deleteAppt(listAppts, appt2);
+		// assertEquals(testAppts, listAppts);
 
 		 TimeTable nullTable = new TimeTable();
 		 assertEquals(null, nullTable.deleteAppt(listAppts, null));
@@ -97,4 +101,74 @@ public class TimeTableTest {
 		 assertNotEquals(null, timeTable.getApptRange(listAppts, today, tomorrow));
 	 }
 //add more unit tests as you needed
+
+	@Test
+	public void test03()  throws Throwable  {
+		TimeTable timetable = new TimeTable();
+
+		GregorianCalendar today = new GregorianCalendar(2018,01,01);
+
+		Appt appt = new Appt(01, 01, 02, 01, 2018, "First", "First");
+		Appt appt2 = new Appt(02,02, 01, 02, 2019, "Second", "Second");
+		Appt appt3 = new Appt(28,22, 22, 12, 2020, "Third", "Third");
+		Appt appt4 = new Appt(02,40, 01, 02, 2019, "Fourth", "Fourth");
+		LinkedList<Appt> listAppts = new LinkedList<Appt>();
+		listAppts.add(appt);
+		listAppts.add(appt2);
+		listAppts.add(appt3);
+		listAppts.add(appt4);
+
+		LinkedList<Appt> listAppts2 = new LinkedList<Appt>();
+		listAppts2.add(appt2);
+
+		LinkedList<Appt> nullListAppts = null;
+
+
+
+		assertEquals(null, timetable.deleteAppt(nullListAppts, appt));
+		assertEquals(false, appt3.getValid());
+		assertEquals(null, timetable.deleteAppt(listAppts, appt3));
+		assertEquals(null, timetable.deleteAppt(listAppts, appt));
+
+	}
+
+	@Test
+	public void test04()  throws Throwable  {
+		TimeTable timetable = new TimeTable();
+
+		LinkedList<Appt> listAppts = new LinkedList<Appt>();
+		Appt appt = new Appt(01, 01, 02, 01, 2018, "First", "First");
+		Appt appt2 = new Appt(02,02, 01, 02, 2019, "Second", "Second");
+		Appt appt3 = new Appt(28,22, 22, 12, 2020, "Third", "Third");
+		Appt appt4 = new Appt(02,40, 01, 02, 2019, "Fourth", "Fourth");
+
+
+		int [] pv4 = {};
+		timetable.permute(listAppts, pv4);
+
+		listAppts.add(appt);
+		listAppts.add(appt2);
+		listAppts.add(appt3);
+		int[] pv = {0, 1, 2};
+		timetable.permute(listAppts, pv);
+
+
+
+		LinkedList<Appt> newApptsTest = new LinkedList<Appt>();
+		LinkedList<Appt> newAppts = new LinkedList<Appt>();
+
+		newAppts.add(appt);
+		newAppts.add(appt2);
+		newApptsTest.add(appt2);
+		newApptsTest.add(appt);
+
+		int[] pv3 = {1,0}; //Testing to see if you can switch
+
+		newAppts = timetable.permute(newAppts, pv3);
+
+
+		System.out.print(newApptsTest.getFirst().toString());
+		System.out.print(newAppts.getFirst().toString());
+
+	}
 }
