@@ -1,0 +1,15 @@
+sValid Hour (Line 115)
+Code: if(startHour<0||startHour>24) in appt.java
+Description: This bug allows the appointment to be valid even if the appointment start hour is out of range. This bug is high severity and high priority because it allows users to have start hours that are out of range. This may affect the code that depends on the start hour such as time table.
+Solution: if(startHour<0||startHour>23)
+
+Bug #2  getApptRange (Line 53)
+Code: for(int i=0; i<appts.size()-1; i++) in TimeTable.java 
+Description: This bug returns the incorrect size of appointments. As a result, it will accidentally delete a an appointment from the time table. It has a medium severity level and high priority. It should be fixed soon because it deletes an appointment.
+Solution: for(int i=0; i<appts.size(); i++)
+
+Bug #3  addAppt (Line 75) 
+Code: getAppts().size()-1 in CalDay.java
+Description: This bug will return an incorrect size of appointments in CalDays. Since this function affects the size of a class, it could affect other functions that rely on this. As a result, I think it is a high severity and high priority bug.
+Solution: getAppts().size() 
+
